@@ -1,0 +1,72 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 720 360] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2263 >>
+stream
+BT /F1 16 Tf 0.05 g 30 330 Td (RQ5. Model-family and access-regime portability) Tj ET
+BT /F1 9 Tf 0.35 g 30 310 Td (All empirical cells remain XX until the sealed leave-one-model-family-out and frozen API analyses.) Tj ET
+BT /F1 11 Tf 0.1 g 45 275 Td (\(a\) Leave-one-model-family-out transfer) Tj ET
+BT /F1 8 Tf 0.25 g 170 250 Td (Qwen3-8B) Tj ET
+BT /F1 8 Tf 0.25 g 270 250 Td (Mistral-7B) Tj ET
+BT /F1 8 Tf 0.25 g 370 250 Td (Gemma-3-12B) Tj ET
+BT /F1 8 Tf 0.25 g 45 218 Td (Qwen3-8B) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 160 200 75 35 re B
+BT /F1 10 Tf 0.2 g 190 213 Td (XX) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 260 200 75 35 re B
+BT /F1 10 Tf 0.2 g 290 213 Td (XX) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 360 200 75 35 re B
+BT /F1 10 Tf 0.2 g 390 213 Td (XX) Tj ET
+BT /F1 8 Tf 0.25 g 45 163 Td (Mistral-7B) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 160 145 75 35 re B
+BT /F1 10 Tf 0.2 g 190 158 Td (XX) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 260 145 75 35 re B
+BT /F1 10 Tf 0.2 g 290 158 Td (XX) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 360 145 75 35 re B
+BT /F1 10 Tf 0.2 g 390 158 Td (XX) Tj ET
+BT /F1 8 Tf 0.25 g 45 108 Td (Gemma-3-12B) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 160 90 75 35 re B
+BT /F1 10 Tf 0.2 g 190 103 Td (XX) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 260 90 75 35 re B
+BT /F1 10 Tf 0.2 g 290 103 Td (XX) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 360 90 75 35 re B
+BT /F1 10 Tf 0.2 g 390 103 Td (XX) Tj ET
+BT /F1 11 Tf 0.1 g 470 275 Td (\(b\) Frozen API portability) Tj ET
+BT /F1 9 Tf 0.2 g 475 235 Td (OpenAI) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 565 227 95 28 re B
+BT /F1 9 Tf 0.25 g 600 235 Td (XX / N/A) Tj ET
+BT /F1 9 Tf 0.2 g 475 190 Td (Anthropic) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 565 182 95 28 re B
+BT /F1 9 Tf 0.25 g 600 190 Td (XX / N/A) Tj ET
+BT /F1 9 Tf 0.2 g 475 145 Td (DeepSeek) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 565 137 95 28 re B
+BT /F1 9 Tf 0.25 g 600 145 Td (XX / N/A) Tj ET
+BT /F1 9 Tf 0.2 g 475 100 Td (Google) Tj ET
+0.98 0.98 0.98 rg 0.5 0.5 0.5 RG 1 w 565 92 95 28 re B
+BT /F1 9 Tf 0.25 g 600 100 Td (XX / N/A) Tj ET
+BT /F1 8 Tf 0.4 g 45 35 Td (Report AUROC retention, ECE degradation, and success-cost-area change with repository-grouped 95% intervals.) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2625
+%%EOF
