@@ -1,0 +1,55 @@
+tables:
+  run_accounting:
+    primary_key: [condition]
+    metrics: [requested, completed, valid, agent_failures, infrastructure_failures, provider_failures, exclusions]
+  sample_characteristics:
+    primary_key: [statistic]
+  failure_prediction:
+    rq: RQ1
+    primary_key: [method]
+    metrics: [auroc, auprc, brier, nll, ece, ace]
+  early_warning:
+    rq: RQ1
+    primary_key: [method, checkpoint]
+    checkpoints: [0.25, 0.50, 0.75, 1.00]
+    metrics: [auroc, auprc, brier, ece, alert_precision, median_lead_steps, median_lead_minutes]
+  condition_robustness:
+    rq: RQ1
+    primary_key: [condition, method]
+  stage_attribution:
+    rq: RQ2
+    primary_key: [method, domain]
+    metrics: [macro_f1, top1, top2, stage_ece]
+  decomposition:
+    rq: RQ2
+    primary_key: [failure_family, uncertainty_component]
+    metrics: [median_standardized_score, iqr_low, iqr_high, effect_size, adjusted_p]
+  selective_control:
+    rq: RQ3
+    primary_key: [policy, cost_vector]
+    metrics: [resolved_rate, failure_rate, abstention_rate, added_tokens, added_tests, wall_time, estimated_cost, utility]
+  action_effectiveness:
+    rq: RQ3
+    primary_key: [action]
+    metrics: [eligible, invoked, useful, precision, paired_success_lift, added_cost]
+  ablation:
+    primary_key: [variant]
+    metrics: [auroc, brier, ece, stage_macro_f1, control_utility]
+  aidev:
+    rq: RQ4
+    primary_key: [review_category]
+    metrics: [prevalence, classifier_f1, merge_odds_ratio, revision_rate_ratio, review_time_ratio, human_intervention_odds_ratio]
+  resource_cost:
+    primary_key: [agent, model, condition]
+    metrics: [valid_runs, input_tokens, output_tokens, tool_calls, tests, gpu_hours, cpu_hours, wall_hours, estimated_cost_usd]
+
+formats_required: [long_csv, formatted_csv, json, latex]
+confidence_interval: 0.95
+provenance_required:
+  - analysis_commit
+  - run_manifest_sha256
+  - dataset_revision
+  - model_revision
+  - agent_revision
+  - protocol_freeze_id
+  - generated_at_utc
