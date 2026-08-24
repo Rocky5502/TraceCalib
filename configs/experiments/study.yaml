@@ -1,0 +1,68 @@
+name: tracecalib_primary_study_v1
+status: PRE_FREEZE
+
+benchmark: swebench_verified
+primary_local_models:
+  - qwen3_8b
+  - mistral_7b_instruct_v03
+  - gemma_3_12b_it
+agents:
+  - mini_swe_agent
+  - agentless
+
+# With 3 local models x 2 agents, the local full matrix expands relative to the
+# earlier 2-model manuscript plan. Freeze only after pilot cost/power analysis.
+local_primary_matrix:
+  clean:
+    target_tasks: 100
+    agent_model_pairs: 6
+    nominal_requested_runs: 600
+  ambiguous_specification:
+    target_tasks: 40
+    agent_model_pairs: 6
+    nominal_requested_runs: 240
+  retrieval_degradation:
+    target_tasks: 40
+    agent_model_pairs: 6
+    nominal_requested_runs: 240
+  repeated_seeds:
+    target_tasks: 30
+    additional_seeds: 2
+    agent_model_pairs: 6
+    nominal_requested_runs: 360
+  targeted_interventions:
+    nominal_requested_runs_min: 120
+    nominal_requested_runs_max: 180
+
+api_reference_subset:
+  models:
+    - openai
+    - anthropic
+    - deepseek
+    - google
+  primary_agent: mini_swe_agent
+  tasks: 20
+  conditions:
+    - clean
+    - ambiguous_specification
+    - retrieval_degradation
+  status: FREEZE_AFTER_PILOT_AND_BUDGET_ESTIMATE
+
+checkpoints: [0.25, 0.50, 0.75, 1.00]
+
+primary_endpoints:
+  rq1:
+    - auroc_at_50pct
+    - brier_at_50pct
+  rq2:
+    - ood_stage_macro_f1
+  rq3:
+    - area_under_success_cost_frontier
+  rq4:
+    - validated_taxonomy_and_adjusted_associations
+
+split_policy:
+  repository_disjoint: true
+  keep_task_variants_together: true
+  keep_seeds_together: true
+  test_set_sealed: true

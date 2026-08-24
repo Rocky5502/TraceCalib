@@ -1,0 +1,16 @@
+agents:
+  mini_swe_agent:
+    upstream: https://github.com/SWE-agent/mini-swe-agent
+    revision: null
+    role: interactive_trace_friendly
+    stage_adapter: mini_swe
+  agentless:
+    upstream: https://github.com/OpenAutoCoder/Agentless
+    revision: null
+    role: localization_repair_validation
+    stage_adapter: agentless
+
+policy:
+  pin_git_sha_before_pilot: true
+  modify_upstream_in_place: false
+  store_upstream_under_external: true

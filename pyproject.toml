@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tracecalib-se"
+version = "0.1.0"
+description = "Stage-wise uncertainty, failure prediction, and selective control for software engineering agents"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "Apache-2.0"}
+dependencies = [
+  "pydantic>=2.9,<3",
+  "PyYAML>=6.0,<7",
+  "typer>=0.12,<1",
+  "rich>=13.8,<15",
+  "httpx>=0.27,<1",
+  "huggingface-hub>=0.27,<1",
+  "datasets>=3.0,<5",
+  "pandas>=2.2,<3",
+  "pyarrow>=17,<23",
+]
+
+[project.optional-dependencies]
+ml = [
+  "numpy>=2.0,<3",
+  "scipy>=1.13,<2",
+  "scikit-learn>=1.5,<2",
+  "statsmodels>=0.14,<1",
+]
+local = [
+  "transformers>=4.51,<6",
+  "accelerate>=1.2,<2",
+]
+dev = [
+  "pytest>=8.3,<9",
+  "pytest-cov>=6,<8",
+  "ruff>=0.9,<1",
+  "mypy>=1.13,<2",
+  "pre-commit>=4,<5",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+warn_redundant_casts = true
+check_untyped_defs = true

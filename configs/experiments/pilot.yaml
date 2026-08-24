@@ -1,0 +1,36 @@
+name: tracecalib_pilot_v1
+purpose: end_to_end_infrastructure_validation
+
+benchmark: swebench_verified
+seed: 20260825
+
+selection:
+  tasks: 12
+  minimum_repositories: 3
+  repository_disjoint_future_split_check: true
+
+local_models:
+  - qwen3_8b
+  - mistral_7b_instruct_v03
+  - gemma_3_12b_it
+
+agents:
+  - mini_swe_agent
+  - agentless
+
+conditions:
+  - clean
+  - ambiguous_specification
+  - retrieval_degradation
+
+api_reference:
+  enabled: false
+  enable_after_local_pilot: true
+
+scale_up_gate:
+  max_infrastructure_failure_rate: 0.15
+  require_gold_patch_validation: true
+  require_schema_validity: true
+  require_secret_scan: true
+  require_cost_estimate: true
+  require_reconstructable_traces: true

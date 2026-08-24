@@ -1,0 +1,34 @@
+datasets:
+  swebench_verified:
+    repo_id: princeton-nlp/SWE-bench_Verified
+    revision: c104f84
+    repo_type: dataset
+    purpose: rq1_rq2_rq3
+    expected_rows: 500
+    allow_patterns:
+      - data/test-00000-of-00001.parquet
+      - README.md
+    known_file_sha256:
+      data/test-00000-of-00001.parquet: a45b1fe4e2f0c8390b2b2938ac83e92ed5979000856808f3679c07812e9e6dcd
+
+  aidev:
+    repo_id: hao-li/AIDev
+    revision: 68ed5f4
+    repo_type: dataset
+    purpose: rq4
+    license: cc-by-4.0
+    allow_patterns:
+      - README.md
+      - all_pull_request.parquet
+      - all_repository.parquet
+      - pr_comments.parquet
+      - pr_review_comments.parquet
+      - pr_reviews.parquet
+      - pull_request.parquet
+      - repository.parquet
+
+policy:
+  commit_raw_data_to_git: false
+  preserve_download_manifest: true
+  compute_sha256_after_download: true
+  copy_gold_patch_into_online_features: false

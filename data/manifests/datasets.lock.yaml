@@ -1,0 +1,13 @@
+generated_for: bootstrap
+status: PRE_FREEZE
+sources:
+  swebench_verified:
+    repo_id: princeton-nlp/SWE-bench_Verified
+    revision: c104f84
+    test_parquet_sha256: a45b1fe4e2f0c8390b2b2938ac83e92ed5979000856808f3679c07812e9e6dcd
+  aidev:
+    repo_id: hao-li/AIDev
+    revision: 68ed5f4
+notes:
+  - Freeze a full resolved commit SHA and local file hashes during acquisition.
+  - Never update these revisions silently after the pilot.

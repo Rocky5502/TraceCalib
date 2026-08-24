@@ -1,0 +1,24 @@
+host:
+  os: Windows 11
+  system_ram_gb: 64
+  execution_preference: WSL2
+  docker_required_for_swebench: true
+
+gpu:
+  user_reported_count: 2
+  exact_count: null
+  captured_device_name: NVIDIA GeForce RTX 5070 Ti
+  captured_device_memory_gib: 15.92
+  exact_inventory_status: TO_VERIFY_WITH_PREFLIGHT
+
+software:
+  python: TO_VERIFY
+  pytorch: TO_VERIFY
+  cuda_runtime: TO_VERIFY
+  nvidia_driver: TO_VERIFY
+  wsl_distribution: TO_VERIFY
+  docker: TO_VERIFY
+
+policy:
+  manuscript_uses_detected_values_only: true
+  do_not_assume_vram_aggregation_without_model_parallel_validation: true
