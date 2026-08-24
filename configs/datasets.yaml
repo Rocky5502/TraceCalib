@@ -3,7 +3,7 @@ datasets:
     repo_id: princeton-nlp/SWE-bench_Verified
     revision: c104f84
     repo_type: dataset
-    purpose: rq1_rq2_rq3
+    purpose: rq1_rq2_rq3_rq5
     expected_rows: 500
     allow_patterns:
       - data/test-00000-of-00001.parquet
@@ -32,3 +32,4 @@ policy:
   preserve_download_manifest: true
   compute_sha256_after_download: true
   copy_gold_patch_into_online_features: false
+  rq5_keep_target_model_family_out_of_fit_and_calibration: true
