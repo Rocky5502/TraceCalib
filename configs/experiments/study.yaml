@@ -1,4 +1,4 @@
-name: tracecalib_primary_study_v1
+name: tracecalib_primary_study_v2
 status: PRE_FREEZE
 
 benchmark: swebench_verified
@@ -10,8 +10,6 @@ agents:
   - mini_swe_agent
   - agentless
 
-# With 3 local models x 2 agents, the local full matrix expands relative to the
-# earlier 2-model manuscript plan. Freeze only after pilot cost/power analysis.
 local_primary_matrix:
   clean:
     target_tasks: 100
@@ -35,34 +33,31 @@ local_primary_matrix:
     nominal_requested_runs_max: 180
 
 api_reference_subset:
-  models:
-    - openai
-    - anthropic
-    - deepseek
-    - google
+  models: [openai, anthropic, deepseek, google]
   primary_agent: mini_swe_agent
   tasks: 20
-  conditions:
-    - clean
-    - ambiguous_specification
-    - retrieval_degradation
+  conditions: [clean, ambiguous_specification, retrieval_degradation]
   status: FREEZE_AFTER_PILOT_AND_BUDGET_ESTIMATE
+  provider_ranking_is_objective: false
+
+rq5_portability:
+  config: configs/experiments/rq5.yaml
+  local_leave_one_family_out: true
+  common_feature_contract: common_black_box_stagewise_v1
+  api_subset_is_secondary: true
 
 checkpoints: [0.25, 0.50, 0.75, 1.00]
 
 primary_endpoints:
-  rq1:
-    - auroc_at_50pct
-    - brier_at_50pct
-  rq2:
-    - ood_stage_macro_f1
-  rq3:
-    - area_under_success_cost_frontier
-  rq4:
-    - validated_taxonomy_and_adjusted_associations
+  rq1: [auroc_at_50pct, brier_at_50pct]
+  rq2: [ood_stage_macro_f1]
+  rq3: [area_under_success_cost_frontier]
+  rq4: [validated_taxonomy_and_adjusted_associations]
+  rq5: [held_out_auroc_retention, ece_degradation, success_cost_area_delta]
 
 split_policy:
   repository_disjoint: true
   keep_task_variants_together: true
   keep_seeds_together: true
   test_set_sealed: true
+  rq5_target_model_never_seen_in_fit_or_calibration: true
