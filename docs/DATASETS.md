@@ -1,6 +1,6 @@
 # Dataset Registry
 
-## SWE-bench Verified — RQ1/RQ2/RQ3
+## SWE-bench Verified — RQ1/RQ2/RQ3/RQ5
 
 Repository: `princeton-nlp/SWE-bench_Verified`
 
@@ -9,6 +9,8 @@ Pinned bootstrap revision: `c104f84`.
 The current Verified dataset contains 500 tasks. The parquet file is small, but task execution requires cloning repositories and building/running benchmark environments. Those checkouts and Docker layers belong in local caches, not Git.
 
 The loader records SHA256 hashes after download and compares the known Verified parquet hash when available.
+
+For RQ5, the same frozen SWE-bench task/run manifests are reused across local model families. Target-model-family outcomes are excluded from model fitting and calibration in each leave-one-family-out fold; the repository split remains disjoint and task variants/seeds remain grouped.
 
 ## AIDev — RQ4
 
