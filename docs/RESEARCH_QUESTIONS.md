@@ -33,3 +33,14 @@ The comparison must include a random matched-budget policy and a stage-blind mor
 **H4:** Specification, approach, implementation, testing, and operational uncertainty categories are associated with rejection, revision count, review duration, or human intervention in AIDev pull requests.
 
 RQ4 is observational. Non-merge is not equivalent to incorrect code, and associations must not be described as causal effects.
+
+## RQ5 — Model-family and access-regime portability
+**How portable are stage-wise uncertainty estimates and selective-control gains across heterogeneous LLM families and access regimes?**
+
+**H5:** A common black-box stage-wise representation exhibits smaller transfer degradation in discrimination, calibration, and control utility than endpoint-only confidence or model-specific uncertainty features under leave-one-model-family-out evaluation, with directionally consistent behavior on the frozen API robustness tier.
+
+Primary analysis: leave-one-local-model-family-out across Qwen3-8B, Mistral-7B-Instruct-v0.3, and Gemma-3-12B-IT using only features available under black-box access.
+
+Primary metrics: held-out-model AUROC retention, absolute ECE degradation, and change in success–cost area.
+
+Secondary analysis: the frozen API subset is a portability stress test, not a provider leaderboard. Exact endpoint IDs, reasoning modes, access dates, and costs are frozen before sealed evaluation. Unexecuted API rows are reported as `N/A`, never estimated.
