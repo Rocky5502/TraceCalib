@@ -1,4 +1,4 @@
-.PHONY: install validate test lint preflight data pilot
+.PHONY: install validate test lint preflight data pilot smoke-rq5 rq5
 
 install:
 	python -m pip install -e '.[dev,ml]'
@@ -20,3 +20,9 @@ data:
 
 pilot:
 	python scripts/run_pilot.py --config configs/experiments/pilot.yaml
+
+smoke-rq5:
+	python scripts/smoke_rq5.py
+
+rq5:
+	python scripts/evaluate_rq5.py --predictions artifacts/frozen/rq5_predictions.parquet --output-dir results/rq5
