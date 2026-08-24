@@ -1,0 +1,71 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 720 360] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2110 >>
+stream
+BT /F1 16 Tf 0.05 g 30 330 Td (Figure 1. Why endpoint confidence is too late) Tj ET
+BT /F1 9 Tf 0.35 g 30 310 Td (TraceCalib-SE observes uncertainty during the software-engineering process and converts it into actionable control.) Tj ET
+0.97 0.98 1.0 rg 0.25 0.35 0.5 RG 1 w 35 205 105 55 re B
+BT /F1 10 Tf 0.08 g 53 229 Td (Issue / spec) Tj ET
+0.97 0.98 1.0 rg 0.25 0.35 0.5 RG 1 w 165 205 105 55 re B
+BT /F1 10 Tf 0.08 g 183 229 Td (Retrieve) Tj ET
+0.97 0.98 1.0 rg 0.25 0.35 0.5 RG 1 w 295 205 105 55 re B
+BT /F1 10 Tf 0.08 g 313 229 Td (Plan) Tj ET
+0.97 0.98 1.0 rg 0.25 0.35 0.5 RG 1 w 425 205 105 55 re B
+BT /F1 10 Tf 0.08 g 443 229 Td (Generate) Tj ET
+0.97 0.98 1.0 rg 0.25 0.35 0.5 RG 1 w 555 205 105 55 re B
+BT /F1 10 Tf 0.08 g 573 229 Td (Test / repair) Tj ET
+0.3 G 1.4 w 140 232 m 159 232 l S
+0.3 g 159 232 m 152 236 l 152 228 l h f
+0.3 G 1.4 w 270 232 m 289 232 l S
+0.3 g 289 232 m 282 236 l 282 228 l h f
+0.3 G 1.4 w 400 232 m 419 232 l S
+0.3 g 419 232 m 412 236 l 412 228 l h f
+0.3 G 1.4 w 530 232 m 549 232 l S
+0.3 g 549 232 m 542 236 l 542 228 l h f
+1 0.96 0.94 rg 0.65 0.25 0.18 RG 1 w 560 90 120 50 re B
+BT /F1 10 Tf 0.15 g 575 117 Td (Endpoint score) Tj ET
+BT /F1 8 Tf 0.35 g 574 101 Td (warning arrives late) Tj ET
+0.3 G 1.4 w 610 205 m 620 145 l S
+0.3 g 620 145 m 613 149 l 613 141 l h f
+0.94 0.98 0.98 rg 0.1 0.45 0.45 RG 1.4 w 180 85 300 70 re B
+BT /F1 12 Tf 0.08 g 290 133 Td (TraceCalib-SE) Tj ET
+BT /F1 9 Tf 0.25 g 205 112 Td (stage-wise risk -> predict -> diagnose -> intervene) Tj ET
+BT /F1 8 Tf 0.35 g 225 96 Td (clarify | retrieve | re-plan | verify | repair | abstain) Tj ET
+0.3 G 1.4 w 87.5 205 m 87.5 160 l S
+0.3 g 87.5 160 m 80.5 164 l 80.5 156 l h f
+0.3 G 1.4 w 217.5 205 m 217.5 160 l S
+0.3 g 217.5 160 m 210.5 164 l 210.5 156 l h f
+0.3 G 1.4 w 347.5 205 m 347.5 160 l S
+0.3 g 347.5 160 m 340.5 164 l 340.5 156 l h f
+0.3 G 1.4 w 477.5 205 m 477.5 160 l S
+0.3 g 477.5 160 m 470.5 164 l 470.5 156 l h f
+0.3 G 1.4 w 607.5 205 m 607.5 160 l S
+0.3 g 607.5 160 m 600.5 164 l 600.5 156 l h f
+BT /F1 8 Tf 0.45 g 35 30 Td (Conceptual schematic; no empirical values are shown.) Tj ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2472
+%%EOF

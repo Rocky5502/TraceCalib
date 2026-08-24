@@ -1,0 +1,47 @@
+name: rq5_model_portability_v1
+status: PRE_FREEZE
+objective: >-
+  Test whether a common black-box stage-wise uncertainty representation transfers across
+  heterogeneous local model families and a frozen API access tier without target-specific retuning.
+
+local_leave_one_family_out:
+  targets:
+    - qwen3_8b
+    - mistral_7b_instruct_v03
+    - gemma_3_12b_it
+  feature_contract: common_black_box_stagewise_v1
+  refit_risk_model_without_target: true
+  refit_calibrator_without_target: true
+  target_retuning_allowed: false
+  repository_disjoint: true
+  primary_metrics:
+    - auroc_retention
+    - ece_degradation
+    - success_cost_area_delta
+  secondary_metrics:
+    - auprc
+    - brier
+    - calibration_slope
+    - calibration_intercept
+
+api_portability:
+  role: secondary_stress_test
+  candidate_models:
+    - openai
+    - anthropic
+    - deepseek
+    - google
+  run_only_after_budget_freeze: true
+  unexecuted_rows: N/A
+  provider_ranking_is_objective: false
+  provider_specific_features_allowed: false
+
+secondary_ablation:
+  cross_model_disagreement: true
+  within_model_self_consistency: true
+  white_box_features: separate_non_primary_analysis
+
+statistics:
+  confidence_interval: 0.95
+  grouped_by_repository: true
+  non_inferiority_margin: TO_FREEZE_BEFORE_SEALED_TEST

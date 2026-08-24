@@ -2,9 +2,69 @@
 
 **Process-Level Uncertainty Propagation and Selective Control for Reliable Software Engineering Agents**
 
-TraceCalib-SE is a reproducible research framework for studying whether repository-level coding agents can **predict**, **diagnose**, and **control** their own failure risk from stage-wise execution traces. The project is designed around four empirical research questions spanning early failure prediction, uncertainty decomposition, selective intervention, and external validation on real agent-authored pull requests.
+TraceCalib-SE is a reproducible research framework for testing whether repository-level coding agents can **predict**, **diagnose**, **control**, and **transfer** their own failure-risk signals from complete software-engineering trajectories.
 
-> **Status:** experiment infrastructure / protocol freeze. Numerical results are intentionally absent until the frozen analysis pipeline produces them.
+> **Status:** infrastructure + pilot preparation. Numerical results are intentionally absent until the frozen analysis pipeline produces them.
+
+## Motivation
+
+Most coding-agent evaluations observe the final patch and ask whether it passes. TraceCalib-SE instead asks where risk emerges during the workflow and whether that risk is useful early enough to change the outcome.
+
+```mermaid
+flowchart LR
+    A[Issue / requirement] --> B[Repository search]
+    B --> C[Plan]
+    C --> D[Patch generation]
+    D --> E[Test / tool execution]
+    E --> F[Repair loop]
+    F --> G[Final patch]
+
+    G -. endpoint-only confidence .-> H[Late risk signal]
+    A -. stage risk .-> U[TraceCalib-SE]
+    B -. stage risk .-> U
+    C -. stage risk .-> U
+    D -. stage risk .-> U
+    E -. stage risk .-> U
+    F -. stage risk .-> U
+    U --> I[Predict failure]
+    U --> J[Diagnose stage]
+    U --> K[Select intervention]
+```
+
+**Publication-quality motivation figure:** [PDF](docs/figures/fig1_motivation.pdf)
+
+## Framework / pipeline
+
+```mermaid
+flowchart TB
+    T[SWE-bench Verified tasks + controlled stressors] --> A1[mini-SWE-agent]
+    T --> A2[Agentless]
+    M[3 local LLM families] --> A1
+    M --> A2
+    A1 --> X[Normalized event trace]
+    A2 --> X
+    X --> S1[Specification uncertainty]
+    X --> S2[Retrieval uncertainty]
+    X --> S3[Planning uncertainty]
+    X --> S4[Generation uncertainty]
+    X --> S5[Execution uncertainty]
+    X --> S6[Repair uncertainty]
+    S1 --> R[Temporal risk + stage attribution]
+    S2 --> R
+    S3 --> R
+    S4 --> R
+    S5 --> R
+    S6 --> R
+    R --> P[Predict]
+    R --> D[Diagnose]
+    R --> C[Control under budget]
+    R --> Q5[Cross-model portability]
+    C --> O[Clarify / retrieve / re-plan / verify / repair / abstain]
+    V[AIDev pull requests] --> RQ4[RQ4 external validation]
+```
+
+**Publication-quality framework figure:** [PDF](docs/figures/fig2_framework.pdf)  
+**RQ5 reporting shell:** [PDF](docs/figures/fig11_rq5_model_portability_TBD.pdf)
 
 ## Research questions
 
@@ -18,86 +78,40 @@ TraceCalib-SE is a reproducible research framework for studying whether reposito
 
 **RQ3 — Selective control.** Can uncertainty-specific interventions improve task success under a fixed computational budget?
 
-**H3.** Stage-aware control dominates static retry, final-confidence abstention, test-failure-only repair, and stage-blind conformal control on the success–cost frontier.
+**H3.** Stage-aware control dominates static retry, final-confidence abstention, test-failure-only repair, and stage-blind conformal control on the success-cost frontier.
 
 **RQ4 — External validation.** Do benchmark-derived uncertainty categories explain human review friction in real agent-authored pull requests?
 
 **H4.** Specification, approach, implementation, testing, and operational uncertainty categories are associated with rejection, revision count, review duration, or human intervention in AIDev pull requests.
 
-## Study design
+**RQ5 — Model portability.** How portable are stage-wise uncertainty estimates and selective-control gains across heterogeneous LLM families and access regimes?
 
-TraceCalib-SE instruments complete software-agent trajectories and maps each event into one of six actionable stages:
+**H5.** A common black-box stage-wise representation exhibits smaller transfer degradation in discrimination, calibration, and control utility than endpoint-only confidence or model-specific uncertainty features under leave-one-model-family-out evaluation, with directionally consistent behavior on the frozen API robustness tier.
 
-1. specification,
-2. retrieval,
-3. planning,
-4. generation,
-5. execution,
-6. repair.
+## Models
 
-The framework then evaluates three capabilities:
-
-- **Predict:** estimate final task failure from partial trajectories.
-- **Diagnose:** identify the dominant actionable failure stage.
-- **Intervene:** choose a stage-specific action under a fixed budget.
-
-Infrastructure/provider failures are recorded separately and are never relabeled as model uncertainty.
-
-## Primary local models
-
-The initial local matrix uses models already available or practical for the lab workstation:
-
+### Primary local families
 | Model | Role | Default deployment |
 |---|---|---|
-| `Qwen/Qwen3-8B` | primary local model | local Transformers/vLLM, pinned revision |
-| `mistralai/Mistral-7B-Instruct-v0.3` | primary local model | local Transformers/vLLM, pinned revision |
-| `google/gemma-3-12b-it` | larger local robustness model | local multi-GPU/quantized deployment after license acceptance |
+| `Qwen/Qwen3-8B` | primary local | local, pinned revision |
+| `mistralai/Mistral-7B-Instruct-v0.3` | primary local | local, pinned revision |
+| `google/gemma-3-12b-it` | local robustness / RQ5 family | gated + validated local/quantized deployment |
 
-Gemma model files require acceptance of Google's Gemma usage terms on Hugging Face before download.
+### Secondary API portability tier
+OpenAI `gpt-5.6-terra`, Anthropic `claude-sonnet-5`, DeepSeek `deepseek-v4-flash`, and Google `gemini-3.7-flash` are candidate black-box portability endpoints. Exact endpoint strings, access dates, settings, and pricing are frozen before execution. This tier is **not** a provider leaderboard.
 
-## API reference models
-
-API models are **secondary robustness/reference models**, not replacements for the local primary matrix. Exact IDs and pricing are frozen at experiment time.
-
-- OpenAI: `gpt-5.6-terra`
-- Anthropic: `claude-sonnet-5`
-- DeepSeek: `deepseek-v4-flash`
-- Google: `gemini-3.7-flash`
-
-The API subset is deliberately smaller to control cost and reduce model-version drift.
-
-## Agent scaffolds
-
-The experiment adapters are designed for two complementary agent topologies:
+## Agents and datasets
 
 - **mini-SWE-agent** — interactive, linear, trace-friendly execution.
-- **Agentless** — localization → repair → validation pipeline.
+- **Agentless** — localization -> repair -> validation.
+- **SWE-bench Verified** (`princeton-nlp/SWE-bench_Verified`) — primary RQ1/RQ2/RQ3/RQ5 controlled benchmark.
+- **AIDev** (`hao-li/AIDev`) — RQ4 external validation.
 
-Upstream repositories are pinned by Git SHA before the pilot. We do not modify upstream projects in place; TraceCalib-SE wraps them through adapters.
-
-## Datasets
-
-### SWE-bench Verified
-
-Primary controlled benchmark for RQ1–RQ3.
-
-- Hugging Face: `princeton-nlp/SWE-bench_Verified`
-- 500 verified tasks.
-- The repository stores only acquisition code, manifests, hashes, and derived metadata — **not checked-out benchmark repositories or raw Docker environments**.
-
-### AIDev
-
-External validation dataset for RQ4.
-
-- Hugging Face: `hao-li/AIDev`
-- Large-scale agent-authored pull-request/review data.
-- The repository stores scripts and versioned manifests; raw Parquet files remain outside Git.
-
-Run `python scripts/download_datasets.py --all` after creating the environment.
+Raw benchmark repositories, model weights, Docker environments, and unrestricted traces are not committed. The repository stores acquisition scripts, pinned manifests, hashes, schemas, and derived/releasable metadata.
 
 ## Hardware profile
 
-Current lab profile (must be verified by `scripts/preflight.py` before publication):
+Current lab profile, to be verified by preflight before publication:
 
 - Windows 11 workstation
 - 64 GB system RAM
@@ -105,33 +119,29 @@ Current lab profile (must be verified by `scripts/preflight.py` before publicati
 - captured device: NVIDIA GeForce RTX 5070 Ti
 - captured device memory: 15.92 GiB
 
-The exact GPU count, driver, CUDA runtime, PyTorch build, model quantization, and software versions are written to `artifacts/machine_manifest.json` by preflight and later copied into the manuscript.
+`python scripts/preflight.py --write artifacts/machine_manifest.json` records the exact GPU count, VRAM, driver, CUDA/PyTorch, WSL2, Docker, and software versions.
 
 ## Repository layout
 
 ```text
 TraceCalib/
-├── configs/              # datasets, models, agents, experiment tiers
-├── data/                 # README + manifests only; raw data ignored by Git
-├── docs/                 # protocol, RQs, model/data notes
-├── scripts/              # preflight, downloads, validation, pilot entry points
-├── src/tracecalib/       # reusable research code
-│   ├── data/
-│   ├── instrumentation/
-│   ├── providers/
-│   └── reporting/
-├── tests/                # schema/config/provider tests
-├── results/              # generated result artifacts (mostly ignored)
-├── AGENTS.md             # Codex/research-engineering rules
-├── pyproject.toml
+├── configs/experiments/        # pilot, main study, RQ5 portability
+├── data/manifests/             # versioned dataset manifests only
+├── docs/                       # protocol and scientific contracts
+│   └── figures/                # editable vector PDF figures
+├── scripts/                    # preflight, data, pilot, RQ5 evaluation
+├── src/tracecalib/
+│   ├── evaluation/             # metrics and portability evaluation
+│   ├── instrumentation/        # normalized trace schema
+│   ├── providers/              # local/API provider interfaces
+│   └── reporting/              # result-table contracts
+├── tests/
+├── results/                    # generated empirical outputs
+├── AGENTS.md                   # research-integrity rules
 └── .env.example
 ```
 
 ## Quick start
-
-### 1. Windows / WSL2
-
-For the full SWE-bench pipeline, use WSL2 + Docker rather than executing repository containers directly in native Windows paths.
 
 ```bash
 git clone https://github.com/Rocky5502/TraceCalib.git
@@ -139,78 +149,53 @@ cd TraceCalib
 python -m venv .venv
 source .venv/bin/activate
 pip install -e '.[dev,ml]'
-```
-
-### 2. Preflight
-
-```bash
 python scripts/preflight.py --write artifacts/machine_manifest.json
 python scripts/validate_config.py
-```
-
-### 3. Credentials
-
-Copy the template, but never commit the resulting `.env`:
-
-```bash
-cp .env.example .env
-```
-
-API/provider credentials are optional until the API reference phase.
-
-### 4. Download data
-
-```bash
+python scripts/check_local_models.py
 python scripts/download_datasets.py --all
+pytest -q
 ```
 
-### 5. Run the pilot
-
-The full study must **not** start until the pilot gate passes.
+Run the **pilot only** before scaling:
 
 ```bash
 python scripts/run_pilot.py --config configs/experiments/pilot.yaml
 ```
 
-## Evaluation outputs
+RQ5 plumbing can be tested without contaminating `results/`:
 
-The reporting contract requires machine-generated versions of:
+```bash
+python scripts/smoke_rq5.py
+```
 
-- run accounting,
-- sample characteristics,
-- failure prediction,
-- early warning,
-- condition robustness,
-- stage attribution,
-- uncertainty decomposition,
-- selective control,
-- action effectiveness,
-- ablations,
-- AIDev external validation,
-- compute/cost accounting.
+The smoke fixture is synthetic and writes only under `artifacts/smoke/`; it is never a manuscript result.
 
-Primary metrics include AUROC, AUPRC, Brier score, NLL, ECE/ACE, warning lead time, Macro-F1, risk–coverage, and success–cost utility. Repository-grouped uncertainty intervals and matched-budget comparisons are mandatory.
+After real frozen predictions exist:
 
-## Reproducibility rules
+```bash
+python scripts/evaluate_rq5.py \
+  --predictions artifacts/frozen/rq5_predictions.parquet \
+  --output-dir results/rq5
+```
 
-- Never fabricate or manually type result values.
-- Never use gold patches, future trajectory events, final task labels, or hidden-test outcomes as online features.
-- Keep train/calibration/test partitions repository-disjoint.
-- Keep paired seeds, perturbations, and interventions for one task in the same partition.
-- Separate infrastructure failures from agent failures.
-- Pin every dataset, model, provider endpoint, prompt/config, agent scaffold, and container revision.
-- Report null and negative findings.
-- Do not silently substitute models/providers.
-- Do not commit secrets, raw benchmark checkouts, large model weights, or unrestricted raw traces.
+## Result contract
 
-## Security note
+All manuscript results are generated from machine-readable artifacts. Required tables cover run accounting, sample characteristics, RQ1 failure prediction/early warning, RQ2 attribution/decomposition, RQ3 selective control/action effectiveness, RQ4 AIDev validation, **RQ5 model portability**, ablations, and resource cost.
 
-This repository is currently public. Keep API keys, Hugging Face tokens, local model paths, private traces, and unpublished manuscript data outside Git. `.env`, raw data directories, weights, and execution caches are ignored by default.
+Primary metrics include AUROC, AUPRC, Brier, NLL, ECE/ACE, warning lead time, Macro-F1, risk-coverage, success-cost area, held-out-model AUROC retention, and ECE degradation. Repository-grouped intervals and matched-budget comparisons are mandatory.
 
-## Citation
+## Research integrity
 
-A citation entry will be added after the manuscript metadata and archival artifact DOI are frozen.
+- No fabricated or manually typed result values.
+- No gold patches, future trajectory events, final labels, or hidden-test outcomes as online features.
+- Repository-disjoint train/calibration/test partitions.
+- Target model family excluded from RQ5 model fitting and calibration.
+- Infrastructure/provider failures separated from agent failures.
+- Model/dataset/agent/provider revisions pinned before sealed evaluation.
+- Null and negative findings retained.
+- API targets not executed under the frozen budget are reported `N/A`.
+- Secrets, model weights, raw benchmark checkouts, and private traces stay outside Git.
 
 ## License
 
-Research code is released under the Apache-2.0 license unless otherwise noted. Third-party models, datasets, and upstream agent repositories retain their original licenses and terms.
+Original TraceCalib-SE research code is Apache-2.0. Third-party models, datasets, and upstream agent repositories retain their own licenses and terms.
