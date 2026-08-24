@@ -26,6 +26,7 @@
 - repository-disjoint splits;
 - 3 local models x 2 agents;
 - clean, stress, repeated-seed, and intervention runs;
+- freeze RQ5 leave-one-model-family-out folds and non-inferiority criterion;
 - immutable raw traces and run accounting.
 
 ## Phase 4 — uncertainty models and RQ1/RQ2
@@ -38,21 +39,31 @@
 ## Phase 5 — RQ3
 - paired intervention reruns;
 - static, random, more-compute, conformal and oracle controls;
-- success–cost frontier.
+- success-cost frontier.
 
-## Phase 6 — API robustness subset
-- freeze task subset and provider IDs;
-- GPT-5.6 Terra, Claude Sonnet 5, DeepSeek V4 Flash, Gemini 3.7 Flash;
-- do not enlarge after seeing favorable results.
+## Phase 6 — RQ5 local model portability
+- common black-box stage-wise feature contract;
+- leave Qwen3-8B out, fit/calibrate on the other families, then evaluate Qwen3-8B;
+- repeat for Mistral-7B-Instruct-v0.3 and Gemma-3-12B-IT;
+- report AUROC retention, ECE degradation, and success-cost-area change;
+- run cross-model-disagreement and white-box feature ablations separately;
+- never retune on held-out-model outcomes.
 
-## Phase 7 — RQ4 AIDev
+## Phase 7 — frozen API portability subset
+- freeze task subset, endpoint IDs, reasoning modes, access dates, pricing and budget;
+- candidate endpoints: GPT-5.6 Terra, Claude Sonnet 5, DeepSeek V4 Flash, Gemini 3.7 Flash;
+- apply the same black-box feature contract;
+- report unexecuted endpoints as N/A;
+- do not enlarge the subset after seeing favorable results and do not frame it as a leaderboard.
+
+## Phase 8 — RQ4 AIDev
 - eligible sample and annotation codebook;
 - validated taxonomy classifier;
 - mixed-effects association models;
 - forest plot and error analysis.
 
-## Phase 8 — manuscript and artifact
-- regenerate every table/figure;
+## Phase 9 — manuscript and artifact
+- regenerate every table/figure including RQ5;
 - replace manuscript XX/TBD values only from structured results;
 - compile paper;
 - prepare release-safe artifact and reproducibility audit.
