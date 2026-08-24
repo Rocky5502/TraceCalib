@@ -1,0 +1,91 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 720 360] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 2827 >>
+stream
+BT /F1 16 Tf 0.05 g 30 330 Td (TraceCalib-SE framework and experimental pipeline) Tj ET
+BT /F1 9 Tf 0.35 g 30 310 Td (Two agent scaffolds x three local model families -> normalized trace -> uncertainty heads -> evaluation and control.) Tj ET
+0.97 0.98 1.0 rg 0.25 0.35 0.5 RG 1 w 35 245 135 45 re B
+BT /F1 9 Tf 0.08 g 47 265 Td (SWE-bench Verified) Tj ET
+0.97 0.98 1.0 rg 0.25 0.35 0.5 RG 1 w 205 245 135 45 re B
+BT /F1 9 Tf 0.08 g 217 265 Td (mini-SWE-agent) Tj ET
+0.97 0.98 1.0 rg 0.25 0.35 0.5 RG 1 w 355 245 135 45 re B
+BT /F1 9 Tf 0.08 g 367 265 Td (Agentless) Tj ET
+0.97 0.98 1.0 rg 0.25 0.35 0.5 RG 1 w 535 245 145 45 re B
+BT /F1 9 Tf 0.08 g 547 265 Td (3 local LLMs) Tj ET
+0.3 G 1.4 w 170 267 m 199 267 l S
+0.3 g 199 267 m 192 271 l 192 263 l h f
+0.3 G 1.4 w 490 267 m 529 267 l S
+0.3 g 529 267 m 522 271 l 522 263 l h f
+0.95 0.97 1 rg 0.25 0.35 0.55 RG 1.4 w 165 175 390 45 re B
+BT /F1 11 Tf 0.08 g 275 195 Td (Normalized event trace) Tj ET
+0.3 G 1.4 w 272 245 m 272 225 l S
+0.3 g 272 225 m 265 229 l 265 221 l h f
+0.3 G 1.4 w 422 245 m 422 225 l S
+0.3 g 422 225 m 415 229 l 415 221 l h f
+0.3 G 1.4 w 605 245 m 605 225 l S
+0.3 g 605 225 m 598 229 l 598 221 l h f
+0.98 0.98 0.98 rg 0.35 0.4 0.48 RG 1 w 35 105 96 40 re B
+BT /F1 9 Tf 0.12 g 57 122 Td (Spec) Tj ET
+0.3 G 1.4 w 360 175 m 83 150 l S
+0.3 g 83 150 m 76 154 l 76 146 l h f
+0.98 0.98 0.98 rg 0.35 0.4 0.48 RG 1 w 147 105 96 40 re B
+BT /F1 9 Tf 0.12 g 169 122 Td (Retrieval) Tj ET
+0.3 G 1.4 w 360 175 m 195 150 l S
+0.3 g 195 150 m 188 154 l 188 146 l h f
+0.98 0.98 0.98 rg 0.35 0.4 0.48 RG 1 w 259 105 96 40 re B
+BT /F1 9 Tf 0.12 g 281 122 Td (Planning) Tj ET
+0.3 G 1.4 w 360 175 m 307 150 l S
+0.3 g 307 150 m 300 154 l 300 146 l h f
+0.98 0.98 0.98 rg 0.35 0.4 0.48 RG 1 w 371 105 96 40 re B
+BT /F1 9 Tf 0.12 g 393 122 Td (Generation) Tj ET
+0.3 G 1.4 w 360 175 m 419 150 l S
+0.3 g 419 150 m 412 154 l 412 146 l h f
+0.98 0.98 0.98 rg 0.35 0.4 0.48 RG 1 w 483 105 96 40 re B
+BT /F1 9 Tf 0.12 g 505 122 Td (Execution) Tj ET
+0.3 G 1.4 w 360 175 m 531 150 l S
+0.3 g 531 150 m 524 154 l 524 146 l h f
+0.98 0.98 0.98 rg 0.35 0.4 0.48 RG 1 w 595 105 96 40 re B
+BT /F1 9 Tf 0.12 g 617 122 Td (Repair) Tj ET
+0.3 G 1.4 w 360 175 m 643 150 l S
+0.3 g 643 150 m 636 154 l 636 146 l h f
+0.94 0.98 0.96 rg 0.18 0.48 0.32 RG 1.4 w 190 30 340 45 re B
+BT /F1 10 Tf 0.1 g 215 51 Td (Risk prediction | stage diagnosis | selective control | RQ5 portability) Tj ET
+0.3 G 1.4 w 83 105 m 250 78 l S
+0.3 g 250 78 m 243 82 l 243 74 l h f
+0.3 G 1.4 w 195 105 m 290 78 l S
+0.3 g 290 78 m 283 82 l 283 74 l h f
+0.3 G 1.4 w 307 105 m 330 78 l S
+0.3 g 330 78 m 323 82 l 323 74 l h f
+0.3 G 1.4 w 419 105 m 370 78 l S
+0.3 g 370 78 m 363 82 l 363 74 l h f
+0.3 G 1.4 w 531 105 m 410 78 l S
+0.3 g 410 78 m 403 82 l 403 74 l h f
+0.3 G 1.4 w 643 105 m 450 78 l S
+0.3 g 450 78 m 443 82 l 443 74 l h f
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+3189
+%%EOF
